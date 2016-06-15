@@ -104,7 +104,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         scene.tickLengthMillis = TickLengthLevelOne
         
       
-            motionDetect.motionDetectionBlock!(CGPointMake(50, 50), 50, CMTimeMake(50, 50))
+            //motionDetect.motionDetectionBlock!(CGPointMake(50, 50), 50, CMTimeMake(50, 50))
             
     
     
