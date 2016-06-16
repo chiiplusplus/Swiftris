@@ -99,6 +99,15 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
     }
     
+    
+    func hardProcessingWithString(input: String, completion: (motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)  {
+        completion(motionCentroid: CGPointMake(50, 50), motionIntensity: 50, frameTime: CMTimeMake(50,50))
+        
+    }
+    
+ 
+    
+    
     func gameDidBegin(swiftris: Swiftris) {
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
@@ -107,9 +116,15 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
       
             //motionDetect.motionDetectionBlock!(CGPointMake(50, 50), 50, CMTimeMake(50, 50))
         motionDetect.addTarget(imageInput)
+      
+        hardProcessingWithString("commands") {
+            (motionCentroid: CGPoint, motionIntensitiy: CGFloat, frameTime:CMTime) in
+            print("got back: \(motionCentroid)")
+        }
         
-
-   
+        
+        
+        
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil {
             scene.addPreviewShapeToScene(swiftris.nextShape!) {
