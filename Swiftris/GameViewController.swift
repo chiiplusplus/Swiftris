@@ -83,8 +83,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         return false
     }
     
+    //let them horizontal fall
     func didTick() {
         swiftris.letShapeFall()
+        //swiftris.fallingShape?.shiftLeftByOneColumn()
+        //scene.redrawShape(swiftris.fallingShape!, completion: {})
+        
     }
     
     func nextShape() {

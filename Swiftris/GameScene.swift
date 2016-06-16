@@ -69,6 +69,7 @@ class GameScene: SKScene {
         lastTick = nil
     }
     
+    // put the block into game layer, pointForColumn
     func pointForColumn(column: Int, row: Int) -> CGPoint {
         let x = LayerPosition.x + (CGFloat(column) * BlockSize) + (BlockSize / 2)
         let y = LayerPosition.y - ((CGFloat(row) * BlockSize) + (BlockSize / 2))
@@ -83,13 +84,15 @@ class GameScene: SKScene {
                 textureCache[block.spriteName] = texture
             }
             let sprite = SKSpriteNode(texture: texture)
-            sprite.position = pointForColumn(block.column, row:block.row - 2)
+            sprite.position = pointForColumn(block.column - 2, row:block.row - 2)
             shapeLayer.addChild(sprite)
             block.sprite = sprite
             
-            // Animation
+            // Animation for the shape
             sprite.alpha = 0
+            
             let moveAction = SKAction.moveTo(pointForColumn(block.column, row: block.row), duration: 0.2)
+            
             moveAction.timingMode = .EaseOut
             let fadeInAction = SKAction.fadeAlphaTo(0.7, duration: 0.2)
             fadeInAction.timingMode = .EaseOut
@@ -97,7 +100,7 @@ class GameScene: SKScene {
         }
         runAction(SKAction.waitForDuration(0.2), completion: completion)
     }
-    
+    // move from the position to the layer
     func movePreviewShape(shape:Shape, completion:() -> ()) {
         for block in shape.blocks {
             let sprite = block.sprite!
@@ -114,7 +117,7 @@ class GameScene: SKScene {
     func redrawShape(shape:Shape, completion:() -> ()) {
         for block in shape.blocks {
             let sprite = block.sprite!
-            let moveTo = pointForColumn(block.column, row:block.row)
+            let moveTo = pointForColumn(block.column, row:block.row) // Change coloum to row and row to column, it change the position to fall
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
             moveToAction.timingMode = .EaseOut
             if block == shape.blocks.last {
@@ -133,7 +136,7 @@ class GameScene: SKScene {
                 let newPosition = pointForColumn(block.column, row: block.row)
                 let sprite = block.sprite!
                 let delay = (NSTimeInterval(columnIdx) * 0.05) + (NSTimeInterval(blockIdx) * 0.05)
-                let duration = NSTimeInterval(((sprite.position.y - newPosition.y) / BlockSize) * 0.1)
+                let duration = NSTimeInterval(((sprite.position.x - newPosition.x) / BlockSize) * 0.1) // I Change y to x
                 let moveAction = SKAction.moveTo(newPosition, duration: duration)
                 moveAction.timingMode = .EaseOut
                 sprite.runAction(
