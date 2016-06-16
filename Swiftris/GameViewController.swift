@@ -9,9 +9,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
     var camIn = GPUImageVideoCamera()
+    var imageInput = GPUImageView()
     var motionDetect = GPUImageMotionDetector()
     var motionDetectionBlock: ((motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)? = nil
-    
+
     
         @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var levelLabel: UILabel!
@@ -105,9 +106,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         
       
             //motionDetect.motionDetectionBlock!(CGPointMake(50, 50), 50, CMTimeMake(50, 50))
-            
-    
-    
+        motionDetect.addTarget(imageInput)
+        
+
    
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil {
