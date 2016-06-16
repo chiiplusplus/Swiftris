@@ -116,6 +116,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
       
             //motionDetect.motionDetectionBlock!(CGPointMake(50, 50), 50, CMTimeMake(50, 50))
         motionDetect.addTarget(imageInput)
+        
       
         hardProcessingWithString("commands") {
             (motionCentroid: CGPoint, motionIntensitiy: CGFloat, frameTime:CMTime) in
