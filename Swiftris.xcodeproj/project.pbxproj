@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C611D4AD1D11B2ED005EEDF4 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C611D4AC1D11B2B9005EEDF4 /* GPUImage.framework */; };
-		C611D4B01D11B30F005EEDF4 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C611D4AC1D11B2B9005EEDF4 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C611D4B11D11B32A005EEDF4 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C611D4AA1D11B2B9005EEDF4 /* libGPUImage.a */; };
 		E644DE221974A2EE0018B14C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E644DE211974A2EE0018B14C /* AppDelegate.swift */; };
 		E644DE261974A2EE0018B14C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E644DE251974A2EE0018B14C /* GameScene.swift */; };
@@ -40,6 +39,7 @@
 		FB799A7A1D134FAE00932BA5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB799A791D134FAE00932BA5 /* AVFoundation.framework */; };
 		FB799A7C1D134FB500932BA5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB799A7B1D134FB500932BA5 /* UIKit.framework */; };
 		FB799A7E1D134FBA00932BA5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB799A7D1D134FBA00932BA5 /* Foundation.framework */; };
+		FB799A7F1D14366200932BA5 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FB799A6A1D134EA000932BA5 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,13 +55,6 @@
 			containerPortal = C611D4A31D11B2B8005EEDF4 /* GPUImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCE209E51943F20C002FEED8;
-			remoteInfo = GPUImageFramework;
-		};
-		C611D4AE1D11B2F5005EEDF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C611D4A31D11B2B8005EEDF4 /* GPUImage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BCE209E41943F20C002FEED8;
 			remoteInfo = GPUImageFramework;
 		};
 		E644DE331974A2EE0018B14C /* PBXContainerItemProxy */ = {
@@ -101,7 +94,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C611D4B01D11B30F005EEDF4 /* GPUImage.framework in CopyFiles */,
+				FB799A7F1D14366200932BA5 /* GPUImage.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +290,6 @@
 			);
 			dependencies = (
 				FB799A701D134F2900932BA5 /* PBXTargetDependency */,
-				C611D4AF1D11B2F5005EEDF4 /* PBXTargetDependency */,
 			);
 			name = Swiftris;
 			productName = Swiftris;
@@ -461,11 +453,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C611D4AF1D11B2F5005EEDF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GPUImageFramework;
-			targetProxy = C611D4AE1D11B2F5005EEDF4 /* PBXContainerItemProxy */;
-		};
 		E644DE341974A2EE0018B14C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E644DE1B1974A2ED0018B14C /* Swiftris */;
