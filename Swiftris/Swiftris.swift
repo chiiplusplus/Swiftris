@@ -58,19 +58,17 @@ class Swiftris {
     }
     
     
-    func detectBorder()->Int{
+    func detectBorder()->Bool{
         
         guard let shape = fallingShape else {
-            //return false
-            return 0
+            return false
         }
         for block in shape.blocks {
             if block.column < 0{
         
         direction=1
                 print(direction)
-                return 1
-                
+                return true
                 
             }
             
@@ -78,14 +76,14 @@ class Swiftris {
                 
                 direction = -1
                 print(direction)
-                return -1
+                return true
             
             }
         
         
         
         }
-        return 1
+        return false
     }
     
     
@@ -255,8 +253,8 @@ class Swiftris {
         
         
         
-        shape.shiftBy(detectBorder(), rows:0)
-        if detectBorder() != 0 {
+        shape.shiftBy(direction, rows:0)
+        if detectBorder() {
             
             
             //shape.raiseShapeByOneRow()
