@@ -28,6 +28,9 @@ class Swiftris {
     var score = 0
     var level = 1
     
+    var direction = -1;
+    
+    
     init() {
         fallingShape = nil
         nextShape = nil
@@ -53,6 +56,36 @@ class Swiftris {
         }
         return (fallingShape, nextShape)
     }
+    
+    
+    func detectBorder()->Bool{
+        
+        guard let shape = fallingShape else {
+            return false
+        }
+        for block in shape.blocks {
+            if block.column < 0{
+        
+        direction=1
+                print(direction)
+                
+            }
+            
+            else if block.column >= NumColumns{
+                
+                direction = -1
+                print(direction)
+            }
+        
+        
+        
+        }
+        return true
+    }
+    
+    
+    
+    
     
     func detectIllegalPlacement() -> Bool {
         guard let shape = fallingShape else {
@@ -173,15 +206,50 @@ class Swiftris {
         }
         while detectIllegalPlacement() == false {
             shape.lowerShapeByOneRow()
+            //moveShapeFromLeftToRight()
         }
         shape.raiseShapeByOneRow()
         delegate?.gameShapeDidDrop(self)
     }
     
+    
+    
+   /* func moveShapeFromLeftToRight(){
+        
+        guard let shape = fallingShape else {
+            return
+        }
+        
+        for i in NumColumns...1 {
+            
+            
+          
+
+            
+            
+               shape.shiftLeftByOneColumn()            }
+            
+            
+
+    }
+    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func letShapeFall() {
         guard let shape = fallingShape else {
             return
         }
+        
+        
+        
+        
         shape.lowerShapeByOneRow()
         if detectIllegalPlacement() {
             shape.raiseShapeByOneRow()
