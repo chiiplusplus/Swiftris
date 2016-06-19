@@ -68,6 +68,7 @@ class Swiftris {
         
         direction=1
                 print(direction)
+                return true
                 
             }
             
@@ -75,12 +76,14 @@ class Swiftris {
                 
                 direction = -1
                 print(direction)
+                return true
+            
             }
         
         
         
         }
-        return true
+        return false
     }
     
     
@@ -250,9 +253,11 @@ class Swiftris {
         
         
         
-        shape.lowerShapeByOneRow()
-        if detectIllegalPlacement() {
-            shape.raiseShapeByOneRow()
+        shape.shiftBy(direction, rows:0)
+        if detectBorder() {
+            
+            
+            //shape.raiseShapeByOneRow()
             if detectIllegalPlacement() {
                 endGame()
             } else {
