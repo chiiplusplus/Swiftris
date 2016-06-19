@@ -209,38 +209,13 @@ class Swiftris {
         }
         while detectIllegalPlacement() == false {
             shape.lowerShapeByOneRow()
-            //moveShapeFromLeftToRight()
+    
         }
         shape.raiseShapeByOneRow()
         delegate?.gameShapeDidDrop(self)
     }
     
-    
-    
-   /* func moveShapeFromLeftToRight(){
-        
-        guard let shape = fallingShape else {
-            return
-        }
-        
-        for i in NumColumns...1 {
-            
-            
-          
 
-            
-            
-               shape.shiftLeftByOneColumn()            }
-            
-            
-
-    }
-    */
-    
-    
-    
-    
-    
     
     
     
