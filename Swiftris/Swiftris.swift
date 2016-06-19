@@ -259,7 +259,7 @@ class Swiftris {
             
             //shape.raiseShapeByOneRow()
             if detectIllegalPlacement() {
-                endGame()
+                //endGame()
             } else {
                 settleShape()
             }
