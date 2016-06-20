@@ -8,6 +8,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
+    
     //var camIn = GPUImageVideoCamera()
     //var imageInput = GPUImageView()
     //var motionDetect = GPUImageMotionDetector()
