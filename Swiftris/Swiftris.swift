@@ -209,24 +209,51 @@ class Swiftris {
         guard let shape = fallingShape else {
             return
         }
-        
+        print("StartFaLL")
         shape.shiftBy(direction, rows:0)
         if detectBorder() {
-            
-            //shape.raiseShapeByOneRow()
+            print("detectBorder")
             if detectIllegalPlacement() {
                 endGame()
+                print("endgame")
             } else {
                 settleShape()
+                print("settlegame")
             }
         } else {
             delegate?.gameShapeDidMove(self)
             if detectTouch() {
                 settleShape()
+                print("sg")
             }
         }
     }
-    
+    /*
+    func letShapeFall() {
+        guard let shape = fallingShape else {
+            return
+        }
+        shape.lowerShapeByOneRow()
+        print("StartFaLL")
+        if detectIllegalPlacement() {
+            shape.raiseShapeByOneRow()
+            print("detectIllegal2")
+            if detectIllegalPlacement() {
+                endGame()
+                print("endgame")
+            } else {
+                settleShape()
+                print("settlegame")
+            }
+        } else {
+            delegate?.gameShapeDidMove(self)
+            if detectTouch() {
+                settleShape()
+                print("sgame")
+            }
+        }
+    }
+    */
     func rotateShape() {
         guard let shape = fallingShape else {
             return
