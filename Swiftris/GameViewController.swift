@@ -86,9 +86,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     //let them horizontal fall
     func didTick() {
         swiftris.letShapeFall()
-        //swiftris.fallingShape?.shiftLeftByOneColumn()
-        //scene.redrawShape(swiftris.fallingShape!, completion: {})
-        
     }
     
     func nextShape() {
@@ -109,26 +106,18 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         
     }*/
     
- 
-    
-    
     func gameDidBegin(swiftris: Swiftris) {
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
-        
       
             //motionDetect.motionDetectionBlock!(CGPointMake(50, 50), 50, CMTimeMake(50, 50))
        // motionDetect.addTarget(imageInput)
         
-      
         /*hardProcessingWithString("commands") {
             (motionCentroid: CGPoint, motionIntensitiy: CGFloat, frameTime:CMTime) in
             print("got back: \(motionCentroid)")
         }*/
-        
-        
-        
         
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil {

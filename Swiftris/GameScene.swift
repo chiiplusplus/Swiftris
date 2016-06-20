@@ -117,7 +117,7 @@ class GameScene: SKScene {
     func redrawShape(shape:Shape, completion:() -> ()) {
         for block in shape.blocks {
             let sprite = block.sprite!
-            let moveTo = pointForColumn(block.column, row:block.row) // Change coloum to row and row to column, it change the position to fall
+            let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
             moveToAction.timingMode = .EaseOut
             if block == shape.blocks.last {

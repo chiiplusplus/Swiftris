@@ -66,29 +66,19 @@ class Swiftris {
         for block in shape.blocks {
             if block.column < 0{
         
-        direction=1
+                direction=1
                 print(direction)
                 return true
                 
             }
-            
             else if block.column >= NumColumns{
-                
                 direction = -1
                 print(direction)
                 return true
-            
             }
-        
-        
-        
         }
         return false
     }
-    
-    
-    
-    
     
     func detectIllegalPlacement() -> Bool {
         guard let shape = fallingShape else {
@@ -215,26 +205,17 @@ class Swiftris {
         delegate?.gameShapeDidDrop(self)
     }
     
-
-    
-    
-    
-    
     func letShapeFall() {
         guard let shape = fallingShape else {
             return
         }
         
-        
-        
-        
         shape.shiftBy(direction, rows:0)
         if detectBorder() {
             
-            
             //shape.raiseShapeByOneRow()
             if detectIllegalPlacement() {
-                //endGame()
+                endGame()
             } else {
                 settleShape()
             }
