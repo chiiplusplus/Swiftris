@@ -8,10 +8,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
-    var camIn = GPUImageVideoCamera()
-    var imageInput = GPUImageView()
-    var motionDetect = GPUImageMotionDetector()
-    var motionDetectionBlock: ((motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)? = nil
+    //var camIn = GPUImageVideoCamera()
+    //var imageInput = GPUImageView()
+    //var motionDetect = GPUImageMotionDetector()
+    //var motionDetectionBlock: ((motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)? = nil
 
     
         @IBOutlet var scoreLabel: UILabel!
@@ -104,10 +104,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     
-    func hardProcessingWithString(input: String, completion: (motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)  {
+   /* func hardProcessingWithString(input: String, completion: (motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)  {
         completion(motionCentroid: CGPointMake(50, 50), motionIntensity: 50, frameTime: CMTimeMake(50,50))
         
-    }
+    }*/
     
  
     
@@ -119,13 +119,13 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         
       
             //motionDetect.motionDetectionBlock!(CGPointMake(50, 50), 50, CMTimeMake(50, 50))
-        motionDetect.addTarget(imageInput)
+       // motionDetect.addTarget(imageInput)
         
       
-        hardProcessingWithString("commands") {
+        /*hardProcessingWithString("commands") {
             (motionCentroid: CGPoint, motionIntensitiy: CGFloat, frameTime:CMTime) in
             print("got back: \(motionCentroid)")
-        }
+        }*/
         
         
         
