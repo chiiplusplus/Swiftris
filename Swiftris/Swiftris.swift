@@ -59,21 +59,16 @@ class Swiftris {
     
     
     func detectBorder()->Bool{
-        
         guard let shape = fallingShape else {
             return false
         }
         for block in shape.blocks {
             if block.column < 0{
-        
                 direction=1
-                print(direction)
                 return true
-                
             }
             else if block.column >= NumColumns{
                 direction = -1
-                print(direction)
                 return true
             }
         }
@@ -108,6 +103,7 @@ class Swiftris {
     
     
     func detectTouch() -> Bool {
+        
         guard let shape = fallingShape else {
             return false
         }
@@ -209,12 +205,14 @@ class Swiftris {
         guard let shape = fallingShape else {
             return
         }
+        
         print("StartFaLL")
         shape.shiftBy(direction, rows:0)
+        print(shape)
         if detectBorder() {
             print("detectBorder")
             if detectIllegalPlacement() {
-                endGame()
+                //endGame()
                 print("endgame")
             } else {
                 settleShape()
@@ -227,29 +225,34 @@ class Swiftris {
                 print("sg")
             }
         }
+        print(shape)
     }
     /*
     func letShapeFall() {
         guard let shape = fallingShape else {
             return
         }
+        print("FALL")
         shape.lowerShapeByOneRow()
-        print("StartFaLL")
+        print(shape)
         if detectIllegalPlacement() {
             shape.raiseShapeByOneRow()
-            print("detectIllegal2")
+            print("detect")
+            print(shape)
             if detectIllegalPlacement() {
-                endGame()
-                print("endgame")
+                //endGame()
+                print("ENDGAME")
+                print(detectIllegalPlacement())
             } else {
                 settleShape()
-                print("settlegame")
+                print("SET")
+                print(detectIllegalPlacement())
             }
         } else {
             delegate?.gameShapeDidMove(self)
             if detectTouch() {
                 settleShape()
-                print("sgame")
+                print("detectTouch")
             }
         }
     }
