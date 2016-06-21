@@ -21,7 +21,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     var motionDetectedCallback:((position:Position, strength:Float) -> ())?
     
-    var camera:Camera?
+    //var camera:Camera!
     
     
     
@@ -145,7 +145,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
        // motionDetector.addTarget(pictureOutput)
         
         
-        motionDetector.addSource(camera!)
+       // motionDetector.addSource(camera)
  
         
         
