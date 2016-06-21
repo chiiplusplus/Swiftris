@@ -1,6 +1,7 @@
 import UIKit
 import SpriteKit
 import GPUImage
+import AVFoundation
 
 
 class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
@@ -38,8 +39,34 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var levelLabel: UILabel!
     
+    
+
+        
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        do {
+            camera = try Camera(sessionPreset:AVCaptureSessionPreset640x480)
+            //camera.runBenchmark = true
+            //camera.delegate = self
+            //camera --> saturationFilter --> blendFilter --> renderView
+            // lineGenerator --> blendFilter
+            //shouldDetectFaces = faceDetectSwitch.on
+            camera.startCapture()
+        } catch {
+            fatalError("Could not initialize rendering pipeline: \(error)")
+        }
+        
+
+        
+        
+        
         
         // Configure the view.
         let skView = view as! SKView
@@ -137,7 +164,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         
     
         //currently CRASHING with unexpected nil error
-       // motionDetector.addSource(camera)
+        motionDetector.addSource(camera)
  
        // set Strength of motion Detector's low pass filter to preconfigured low pass filter's strength
         motionDetector.lowPassStrength=lowPassFilter.strength
