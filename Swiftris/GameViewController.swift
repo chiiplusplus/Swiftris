@@ -10,8 +10,11 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var panPointReference:CGPoint?
   
     
-    //Output zum Testen
-   // let pictureOutput = PictureOutput()
+    //Output only for testing
+
+    
+    let pictureOutput = PictureOutput()
+    
     
     var motionDetector = MotionDetector()
     
@@ -21,9 +24,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     var motionDetectedCallback:((position:Position, strength:Float) -> ())?
     
-    //var camera:Camera!
+    var camera:Camera!
     
-    
+  
+    //OLD OBJECTIVE C-Code from GPUImage1  example
     
     //var camIn = GPUImageVideoCamera()
     //var imageInput = GPUImageView()
@@ -119,40 +123,35 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     
     
-    
-   /* func hardProcessingWithString(input: String, completion: (motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)  {
-        completion(motionCentroid: CGPointMake(50, 50), motionIntensity: 50, frameTime: CMTimeMake(50,50))
-        
-    }*/
+
     
     func gameDidBegin(swiftris: Swiftris) {
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
       
-            //motionDetect.motionDetectionBlock!(CGPointMake(50, 50), 50, CMTimeMake(50, 50))
-       // motionDetect.addTarget(imageInput)
         
-        /*hardProcessingWithString("commands") {
-            (motionCentroid: CGPoint, motionIntensitiy: CGFloat, frameTime:CMTime) in
-            print("got back: \(motionCentroid)")
-        }*/
-        
-        
-    
         
         //Output only for testing purposes
-       // motionDetector.addTarget(pictureOutput)
+        motionDetector.addTarget(pictureOutput)
         
-        
+    
+        //currently CRASHING with unexpected nil error
        // motionDetector.addSource(camera)
  
+       // set Strength of motion Detector's low pass filter to preconfigured low pass filter's strength
+        motionDetector.lowPassStrength=lowPassFilter.strength
         
-        
-        //drop shape if there's a callback from the MotionDetector, but not yet figured out how to set the threshold
+        //drop shape if there's a callback from the MotionDetector, but not yet figured out how to set a threshold
         if (motionDetector.motionDetectedCallback != nil){
             
             swiftris.dropShape()
+            
+        }
+        
+        
+        //trailing closure for making function calls depending on callback
+        motionDetector.motionDetectedCallback = {image in
             
         }
         
