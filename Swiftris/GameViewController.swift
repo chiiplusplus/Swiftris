@@ -22,12 +22,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     var lowPassStrength:Float = 1.0 { didSet {lowPassFilter.strength = lowPassStrength}}
     
-    var motionDetectedCallback:((position:Position, strength:Float) -> ())?
+    //var motionDetectedCallback:((position:Position, strength:Float) -> ())?
     
     var camera:Camera!
     
   
-    //OLD OBJECTIVE C-Code from GPUImage1  example
+    //OLD OBJECTIVE C-Code from GPUImage1 framework example 
     
     //var camIn = GPUImageVideoCamera()
     //var imageInput = GPUImageView()
@@ -142,7 +142,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
        // set Strength of motion Detector's low pass filter to preconfigured low pass filter's strength
         motionDetector.lowPassStrength=lowPassFilter.strength
         
-        //drop shape if there's a callback from the MotionDetector, but not yet figured out how to set a threshold
+        //drop shape if there's a callback from the MotionDetector, but not yet figured out how to set the threshold
         if (motionDetector.motionDetectedCallback != nil){
             
             swiftris.dropShape()
@@ -150,10 +150,17 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
         
         
-        //trailing closure for making function calls depending on callback
-        motionDetector.motionDetectedCallback = {image in
+        //completion closure for making function calls depending on callback
+       
+        
+        motionDetector.motionDetectedCallback = {
+         (position: Position, motionCentroid: Float) in
+         print("got back: \(motionCentroid)")
             
-        }
+         
+            
+         }
+
         
         
         // The following is false when restarting a new game
