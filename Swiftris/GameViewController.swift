@@ -9,34 +9,20 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
-  
-    
-    //Output only for testing
 
-    
-    let pictureOutput = PictureOutput()
-    
-    
     var motionDetector = MotionDetector()
-    
     var lowPassFilter = LowPassFilter()
     
-    var lowPassStrength:Float = 1.0 { didSet {lowPassFilter.strength = lowPassStrength}}
     
-    //var motionDetectedCallback:((position:Position, strength:Float) -> ())?
+    //these two variables define the sensitivity of the motionDetector
+    var lowPassStrength:Float = 1.0 { didSet {lowPassFilter.strength = lowPassStrength}}
+    var motionThreshold:Float = 0.7
+    
     
     var camera:Camera!
     
-  
-    //OLD code from GPUImage1 framework example
-    
-    //var camIn = GPUImageVideoCamera()
-    //var imageInput = GPUImageView()
-    //var motionDetect = GPUImageMotionDetector()
-    //var motionDetectionBlock: ((motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)? = nil
 
-    
-        @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var levelLabel: UILabel!
     
     
@@ -49,21 +35,19 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        //setup camera session
         
         do {
             camera = try Camera(sessionPreset:AVCaptureSessionPreset640x480)
-            //camera.runBenchmark = true
-            camera.delegate = self
-            //camera --> saturationFilter --> blendFilter --> renderView
-            // lineGenerator --> blendFilter
-            //shouldDetectFaces = faceDetectSwitch.on
             camera.startCapture()
+            camera.addTarget(motionDetector)
+            motionDetector.lowPassStrength=lowPassFilter.strength
+            
         } catch {
             fatalError("Could not initialize rendering pipeline: \(error)")
         }
         
-        camera.addTarget(motionDetector)
+        
 
     
         
@@ -134,36 +118,25 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     //let them fall horizontally
     func didTick() {
+        
+        
         swiftris.letShapeFall()
         
-        
     
-        
+         //get centroid and position of the movement from motionDetector by callback
         motionDetector.motionDetectedCallback = {
             (position: Position, motionCentroid: Float) in
             print("got back: Centroid: "+String(motionCentroid)+"Position: "+String(position))
             
-            if (motionCentroid > 0.7){
+            
+            if (motionCentroid > self.motionThreshold){
             self.swiftris.dropShape()
             }
         }
 
-        // motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
-        
-            if (motionDetector.motionDetectedCallback != nil){
-            
-            print("not nil")
-            //self.swiftris.dropShape()
        
         
-            
-        
-        
-        }
-        else {print ("nil")}
-
-        
-    }
+              }
     
     func nextShape() {
         let newShapes = swiftris.newShape()
@@ -186,22 +159,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
       
-        
-        
-        //Output only for testing purposes
-        motionDetector.addTarget(pictureOutput)
-        
-    
-        //currently CRASHING with unexpected nil error
-        motionDetector.addSource(camera)
-        //motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
- 
-       // set Strength of motion Detector's low pass filter to preconfigured low pass filter's strength
-        motionDetector.lowPassStrength=lowPassFilter.strength
-        
-       
-        
-        
    
 
         
@@ -268,15 +225,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
 }
 
 
-extension UIViewController: CameraDelegate {
-    public func didCaptureBuffer(sampleBuffer: CMSampleBuffer) {
-        
-        if let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
-            let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, CMAttachmentMode(kCMAttachmentMode_ShouldPropagate))!
-            let img = CIImage(CVPixelBuffer: pixelBuffer, options: attachments as? [String: AnyObject])
-            var lines = [Line]()
-            
-        }
-}
-}
+
+
 
