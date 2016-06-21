@@ -206,26 +206,26 @@ class Swiftris {
             return
         }
         
-        print("StartFaLL")
+        //print("StartFaLL")
         shape.shiftBy(direction, rows:0)
-        print(shape)
+       // print(shape)
         if detectBorder() {
-            print("detectBorder")
+           // print("detectBorder")
             if detectIllegalPlacement() {
                 //endGame()
-                print("endgame")
+              //  print("endgame")
             } else {
                 settleShape()
-                print("settlegame")
+               // print("settlegame")
             }
         } else {
             delegate?.gameShapeDidMove(self)
             if detectTouch() {
                 settleShape()
-                print("sg")
+               // print("sg")
             }
         }
-        print(shape)
+       // print(shape)
     }
     /*
     func letShapeFall() {
