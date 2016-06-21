@@ -143,7 +143,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             (position: Position, motionCentroid: Float) in
             print("got back: Centroid: "+String(motionCentroid)+"Position: "+String(position))
             
-            if (motionCentroid > 0.5){
+            if (motionCentroid > 0.7){
             self.swiftris.dropShape()
             }
         }
