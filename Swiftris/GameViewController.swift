@@ -65,7 +65,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         
         camera.addTarget(motionDetector)
 
-        
+    
         
         
         
@@ -137,14 +137,15 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         swiftris.letShapeFall()
         
         
-    //motionDetector.addSource(camera)
+    
         
         motionDetector.motionDetectedCallback = {
             (position: Position, motionCentroid: Float) in
             print("got back: Centroid: "+String(motionCentroid)+"Position: "+String(position))
             
-            //self.swiftris.dropShape()
-            
+            if (motionCentroid > 0.5){
+            self.swiftris.dropShape()
+            }
         }
 
         // motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
@@ -152,7 +153,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             if (motionDetector.motionDetectedCallback != nil){
             
             print("not nil")
-            self.swiftris.dropShape()
+            //self.swiftris.dropShape()
        
         
             
