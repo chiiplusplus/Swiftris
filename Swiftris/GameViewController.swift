@@ -42,7 +42,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
 
         
-    
+
     
     
     
@@ -54,7 +54,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         do {
             camera = try Camera(sessionPreset:AVCaptureSessionPreset640x480)
             //camera.runBenchmark = true
-            //camera.delegate = self
+            camera.delegate = self
             //camera --> saturationFilter --> blendFilter --> renderView
             // lineGenerator --> blendFilter
             //shouldDetectFaces = faceDetectSwitch.on
@@ -136,9 +136,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         swiftris.letShapeFall()
         
         
-         //motionDetector.addSource(camera)
+         motionDetector.addSource(camera)
         
-        motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
+       // motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
         if (motionDetector.motionDetectedCallback != nil){
             
             print("not nil")
@@ -184,6 +184,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
         //currently CRASHING with unexpected nil error
         motionDetector.addSource(camera)
+        //motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
  
        // set Strength of motion Detector's low pass filter to preconfigured low pass filter's strength
         motionDetector.lowPassStrength=lowPassFilter.strength
@@ -273,4 +274,22 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     func gameShapeDidMove(swiftris: Swiftris) {
         scene.redrawShape(swiftris.fallingShape!) {}
     }
+    
+   
+    
+    
 }
+
+
+extension UIViewController: CameraDelegate {
+    public func didCaptureBuffer(sampleBuffer: CMSampleBuffer) {
+        
+        if let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
+            let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, CMAttachmentMode(kCMAttachmentMode_ShouldPropagate))!
+            let img = CIImage(CVPixelBuffer: pixelBuffer, options: attachments as? [String: AnyObject])
+            var lines = [Line]()
+                        
+        }
+}
+}
+
