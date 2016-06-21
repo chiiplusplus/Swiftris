@@ -28,7 +28,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var camera:Camera!
     
   
-    //OLD OBJECTIVE C-Code from GPUImage1 framework example 
+    //OLD code from GPUImage1 framework example
     
     //var camIn = GPUImageVideoCamera()
     //var imageInput = GPUImageView()
@@ -131,9 +131,37 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         return false
     }
     
-    //let them horizontal fall
+    //let them fall horizontally
     func didTick() {
         swiftris.letShapeFall()
+        
+        
+         //motionDetector.addSource(camera)
+        
+        
+        //set callback to fixed values
+        motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
+        
+        
+        
+        //drop shape if motionDetectedCallback is not nil
+        if (motionDetector.motionDetectedCallback != nil){
+            
+            print("not nil")
+            self.swiftris.dropShape()
+        
+            
+            
+        //print out the values for motionDetectedCallback
+        motionDetector.motionDetectedCallback = {
+            (position: Position, motionCentroid: Float) in
+            print("got back: Centroid: "+String(motionCentroid)+"Position: "+String(position))
+            
+            //self.swiftris.dropShape()
+            
+            }}
+
+        
     }
     
     func nextShape() {
@@ -169,25 +197,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
        // set Strength of motion Detector's low pass filter to preconfigured low pass filter's strength
         motionDetector.lowPassStrength=lowPassFilter.strength
         
-        //drop shape if there's a callback from the MotionDetector, but not yet figured out how to set the threshold
-        if (motionDetector.motionDetectedCallback != nil){
-            
-            swiftris.dropShape()
-            
-        }
-        
-        
-        //completion closure for making function calls depending on callback
        
-        
-        motionDetector.motionDetectedCallback = {
-         (position: Position, motionCentroid: Float) in
-         print("got back: \(motionCentroid)")
-            
-         
-            
-         }
-
         
         
         // The following is false when restarting a new game
