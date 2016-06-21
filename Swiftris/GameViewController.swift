@@ -136,13 +136,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         swiftris.letShapeFall()
         
         
-         motionDetector.addSource(camera)
-        
-       // motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
-        if (motionDetector.motionDetectedCallback != nil){
-            
-            print("not nil")
-            self.swiftris.dropShape()
+    //motionDetector.addSource(camera)
         
         motionDetector.motionDetectedCallback = {
             (position: Position, motionCentroid: Float) in
@@ -150,7 +144,21 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             
             //self.swiftris.dropShape()
             
-            }}
+        }
+
+        // motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
+        
+            if (motionDetector.motionDetectedCallback != nil){
+            
+            print("not nil")
+            self.swiftris.dropShape()
+       
+        
+            
+        
+        
+        }
+        else {print ("nil")}
 
         
     }
@@ -189,33 +197,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
        // set Strength of motion Detector's low pass filter to preconfigured low pass filter's strength
         motionDetector.lowPassStrength=lowPassFilter.strength
         
-        //drop shape if there's a callback from the MotionDetector, but not yet figured out how to set the threshold
-        if (motionDetector.motionDetectedCallback == nil){
-            
-            
-            print("nil")
-        }
+       
         
         
-        //completion closure for making function calls depending on callback
-        
-        
-      //  motionDetector.motionDetectedCallback?(position: Position.Zero, strength: 50)
-
-        if (motionDetector.motionDetectedCallback != nil){
-            
-            
-            print("not nil")
-        }
-
-        
-        motionDetector.motionDetectedCallback = {
-         (position: Position, motionCentroid: Float) in
-         print("got back: Centroid: "+String(motionCentroid)+"Position: "+String(position))
-            
-         swiftris.dropShape()
-            
-         }
+   
 
         
         
@@ -288,7 +273,7 @@ extension UIViewController: CameraDelegate {
             let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, CMAttachmentMode(kCMAttachmentMode_ShouldPropagate))!
             let img = CIImage(CVPixelBuffer: pixelBuffer, options: attachments as? [String: AnyObject])
             var lines = [Line]()
-                        
+            
         }
 }
 }
