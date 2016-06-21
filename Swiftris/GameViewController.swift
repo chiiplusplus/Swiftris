@@ -63,6 +63,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             fatalError("Could not initialize rendering pipeline: \(error)")
         }
         
+        camera.addTarget(motionDetector)
 
         
         
