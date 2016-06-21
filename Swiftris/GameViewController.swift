@@ -8,6 +8,22 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
+  
+    
+    //Output zum Testen
+   // let pictureOutput = PictureOutput()
+    
+    var motionDetector = MotionDetector()
+    
+    var lowPassFilter = LowPassFilter()
+    
+    var lowPassStrength:Float = 1.0 { didSet {lowPassFilter.strength = lowPassStrength}}
+    
+    var motionDetectedCallback:((position:Position, strength:Float) -> ())?
+    
+    var camera:Camera?
+    
+    
     
     //var camIn = GPUImageVideoCamera()
     //var imageInput = GPUImageView()
@@ -102,6 +118,8 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     
+    
+    
    /* func hardProcessingWithString(input: String, completion: (motionCentroid: CGPoint, motionIntensity: CGFloat, frameTime: CMTime) -> Void)  {
         completion(motionCentroid: CGPointMake(50, 50), motionIntensity: 50, frameTime: CMTimeMake(50,50))
         
@@ -119,6 +137,25 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             (motionCentroid: CGPoint, motionIntensitiy: CGFloat, frameTime:CMTime) in
             print("got back: \(motionCentroid)")
         }*/
+        
+        
+    
+        
+        //Output only for testing purposes
+       // motionDetector.addTarget(pictureOutput)
+        
+        
+        motionDetector.addSource(camera!)
+ 
+        
+        
+        //drop shape if there's a callback from the MotionDetector, but not yet figured out how to set the threshold
+        if (motionDetector.motionDetectedCallback != nil){
+            
+            swiftris.dropShape()
+            
+        }
+        
         
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil {
